@@ -69,6 +69,9 @@ testY <- read.table('UCI HAR Dataset/test/y_test.txt'
 testX <- read.table('UCI HAR Dataset/test/x_test.txt'
                         ,col.names = features$featureName
                         ,header = FALSE)
+
+####################################################################
+# Read subject data
 testSubject <- read.table('UCI HAR Dataset/test/subject_test.txt'
                         ,col.names = 'subject'
                         ,header = FALSE)
@@ -102,6 +105,7 @@ allData$activity <- activitylabels[allData$activity,]$activityName
 
 #################################################################
 # Reshape data to show mean by subject and activity and create
+# tidy dataset
 
 dataMelt<-melt(allData, id = c('subject', 'activity'))
 tidyData<-dcast(dataMelt, subject+activity ~ variable, mean)
