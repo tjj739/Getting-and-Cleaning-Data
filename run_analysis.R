@@ -26,9 +26,9 @@ library(reshape2)
 fileURL <-'https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip'
 if(!file.exists('UCIHARDataset.zip')){
         download.file(fileURL
-                      ,destfile=UCIHARDataset.zip'
-                      )
+                      ,destfile='UCIHARDataset.zip')
 }
+
 # Uncompress the original data file
 if (!file.exists('UCI HAR Dataset')){
         unzip('UCIHARDataset.zip')
@@ -69,9 +69,6 @@ testY <- read.table('UCI HAR Dataset/test/y_test.txt'
 testX <- read.table('UCI HAR Dataset/test/x_test.txt'
                         ,col.names = features$featureName
                         ,header = FALSE)
-
-####################################################################
-# Read subject data
 testSubject <- read.table('UCI HAR Dataset/test/subject_test.txt'
                         ,col.names = 'subject'
                         ,header = FALSE)
@@ -84,7 +81,6 @@ testSubject <- read.table('UCI HAR Dataset/test/subject_test.txt'
 # columns if desired.
 
 allX <- rbind(trainX, testX)
-# allX <- allX[, grep('mean|std', features$featureName)]
 allX <- select(allX
         ,contains("mean")
         ,contains("std")
